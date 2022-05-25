@@ -19,7 +19,6 @@ object ApplicationListener {
       .getOrCreate()
 
 
-
     import spark.implicits._
     val person = Seq(
       ("John", "Barcelona"),
