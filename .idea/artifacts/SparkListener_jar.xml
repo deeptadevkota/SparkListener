@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SparkListener:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SparkListener_jar</output-path>
+    <root id="archive" name="SparkListener.jar">
+      <element id="module-output" name="SparkListener" />
+    </root>
+  </artifact>
+</component>
