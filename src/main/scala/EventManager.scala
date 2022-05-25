@@ -6,7 +6,12 @@ import org.apache.spark.scheduler.{SparkListener, SparkListenerJobEnd, SparkList
 
 class EventManager extends SparkListener {
 
+  private var appName: String = _
+  private var appID: Option[String] = _
+
   override def onApplicationStart(applicationStart: SparkListenerApplicationStart): Unit = {
+    appName = applicationStart.appName
+    appID = applicationStart.appId
     println(s"-------------------------------------------------------------------------------------------------------------"+
       s"\n                          Application Starts" +
       s"\n-------------------------------------------------------------------------------------------------------------"+
@@ -83,7 +88,11 @@ class EventManager extends SparkListener {
   override def onApplicationEnd(applicationEnd: SparkListenerApplicationEnd): Unit = {
     println(s"-------------------------------------------------------------------------------------------------------------"+
       s"\n                          Application Ends" +
+      s"\n-------------------------------------------------------------------------------------------------------------"+
+      s"\n                          App ID: ${appID} " +
+      s"\n                          App name: ${appName} " +
       s"\n-------------------------------------------------------------------------------------------------------------\n\n\n")
+  }
   }
 
 }

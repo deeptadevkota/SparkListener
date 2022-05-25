@@ -4,7 +4,7 @@
 		module="sparklistener-build"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20220525155743"
+		publication="20220525181108"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>
