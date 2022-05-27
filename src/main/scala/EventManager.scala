@@ -6,20 +6,10 @@ import org.apache.spark.scheduler.{SparkListener, SparkListenerJobEnd, SparkList
 
 class EventManager extends SparkListener {
 
-  private var appName: String = _
-  private var appID: Option[String] = _
+  var appName: String = _
+  var appID: String = _
+  var HTTP_endpoint : String = _
 
-
-  override def onApplicationStart(applicationStart: SparkListenerApplicationStart): Unit = {
-    appName = applicationStart.appName
-    appID = applicationStart.appId
-    println(s"-------------------------------------------------------------------------------------------------------------"+
-      s"\n                          Application Starts" +
-      s"\n-------------------------------------------------------------------------------------------------------------"+
-      s"\n                          App ID: ${applicationStart.appId} " +
-      s"\n                          App name: ${applicationStart.appName} " +
-      s"\n-------------------------------------------------------------------------------------------------------------\n\n\n")
-  }
 
   override def onJobStart(jobStart: SparkListenerJobStart): Unit = {
     println (
@@ -92,6 +82,7 @@ class EventManager extends SparkListener {
       s"\n-------------------------------------------------------------------------------------------------------------"+
       s"\n                          App ID: ${appID} " +
       s"\n                          App name: ${appName} " +
+      s"\n                          HTTP end point name: ${HTTP_endpoint} " +
       s"\n-------------------------------------------------------------------------------------------------------------\n\n\n")
   }
 }
