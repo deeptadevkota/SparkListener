@@ -9,6 +9,7 @@ class EventManager extends SparkListener {
   private var appName: String = _
   private var appID: Option[String] = _
 
+
   override def onApplicationStart(applicationStart: SparkListenerApplicationStart): Unit = {
     appName = applicationStart.appName
     appID = applicationStart.appId

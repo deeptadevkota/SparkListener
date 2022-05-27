@@ -10,6 +10,7 @@ object ApplicationListener {
 
     val conf = new SparkConf().set("spark.extraListeners", "EventManager.EventManager")
     val sc = new SparkContext(conf)
+    println(s"The application ID is (printed from the main() driver function is): ${sc.applicationId}")
 
     sc.setLogLevel("ERROR")
 
@@ -18,24 +19,21 @@ object ApplicationListener {
       .appName("SparkByExample")
       .getOrCreate()
 
-
     import spark.implicits._
     val person = Seq(
       ("John", "Barcelona"),
       ("Naveen", "Texas"),
       ("Rahul", "Bangalore")
     ).toDF("Name", "City")
-    person.show()
+
     val city = Seq(
       ("Barcelona", "Spain", "Euro"),
       ("Bangalore", "India", "INR")
     ).toDF("City", "Country", "Currency")
-    city.show()
+
     person.join(
       city,
       person("city") <=> city("city")
     ).show()
-
-
   }
 }
