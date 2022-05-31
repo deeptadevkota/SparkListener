@@ -4,11 +4,10 @@ import org.apache.spark.scheduler.{SparkListener, SparkListenerJobEnd, SparkList
   SparkListenerStageCompleted, SparkListenerTaskEnd, SparkListenerStageSubmitted, SparkListenerTaskStart, SparkListenerApplicationStart ,SparkListenerApplicationEnd}
 
 
-class EventManager extends SparkListener {
+class EventManager (val appName: String ,
+                    val appID: String ,
+                    val HTTP_endpoint : String = "predefined_HTTP_endpoint") extends SparkListener {
 
-  var appName: String = _
-  var appID: String = _
-  var HTTP_endpoint : String = _
 
 
   override def onJobStart(jobStart: SparkListenerJobStart): Unit = {
@@ -84,5 +83,6 @@ class EventManager extends SparkListener {
       s"\n                          App name: ${appName} " +
       s"\n                          HTTP end point name: ${HTTP_endpoint} " +
       s"\n-------------------------------------------------------------------------------------------------------------\n\n\n")
+
   }
 }

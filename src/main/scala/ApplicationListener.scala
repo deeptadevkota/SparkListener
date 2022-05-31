@@ -7,15 +7,21 @@ import EventManager.EventManager
 
 object ApplicationListener {
   def main(args:Array[String]):Unit= {
-    
-    val sc = new SparkContext()
-    val em = new EventManager.EventManager
-    em.appID = sc.applicationId
-    em.appName = sc.appName
-    em.HTTP_endpoint = args(0)
-    sc.addSparkListener(em)
 
-    println(s"\n\n\nThe application ID is driver function is): ${sc.applicationId} and the HTTP end point is ${args(0)}\n\n\n")
+    val sc = new SparkContext()
+
+
+    var em: EventManager = null
+
+    if(args.length == 0)
+    {
+      em = new EventManager(sc.applicationId, sc.appName)
+    }
+    else
+    {
+      em = new EventManager(sc.applicationId, sc.appName, args(0))
+    }
+    sc.addSparkListener(em)
 
     sc.setLogLevel("ERROR")
 
