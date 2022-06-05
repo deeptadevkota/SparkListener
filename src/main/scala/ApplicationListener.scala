@@ -3,9 +3,8 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.scheduler.{SparkListener, SparkListenerJobEnd, SparkListenerJobStart,
   SparkListenerStageCompleted, SparkListenerTaskEnd, SparkListenerStageSubmitted, SparkListenerTaskStart, SparkListenerApplicationEnd}
 
-import scala.collection.JavaConverters._
-
 import EventManager.EventManager
+import ApplicationImplementation.ApplicationImplementation
 
 // $SPARK_HOME/bin/spark-submit --class ApplicationListener --driver-java-options -DHTTP_endpoint=xyz --master local SparkListener.jar
 object ApplicationListener {
@@ -27,24 +26,10 @@ object ApplicationListener {
 
     val spark: SparkSession = SparkSession.builder()
       .master("local[1]")
-      .appName("SparkByExample")
+      .appName("Application with Listener")
       .getOrCreate()
 
-    import spark.implicits._
-    val person = Seq(
-      ("John", "Barcelona"),
-      ("Naveen", "Texas"),
-      ("Rahul", "Bangalore")
-    ).toDF("Name", "City")
-
-    val city = Seq(
-      ("Barcelona", "Spain", "Euro"),
-      ("Bangalore", "India", "INR")
-    ).toDF("City", "Country", "Currency")
-
-    person.join(
-      city,
-      person("city") <=> city("city")
-    ).show()
+    val appImplement = new ApplicationImplementation(spark)
+    appImplement.appCode()
   }
 }
